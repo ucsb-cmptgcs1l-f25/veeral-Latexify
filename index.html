@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to LaTeX Converter</title>
+</head>
+<body>
+    <h1>Upload Image to Convert to LaTeX</h1>
+    
+    <input type="file" id="imageUpload" accept="image/*">
+    <button onclick="uploadImage()">Convert</button>
+
+    <h2>Output:</h2>
+    <pre id="latexOutput" style="white-space: pre-wrap; background: #eee; padding: 10px;"></pre>
+    
+    <script>
+        function uploadImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            const outputElement = document.getElementById('latexOutput');
+            
+            if (!file) {
+                outputElement.textContent = "Please select an image file first.";
+                return;
+            }
+
+            outputElement.textContent = "Processing image... This may take a moment.";
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/convert', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    outputElement.textContent = `Error: ${data.error}`;
+                } else {
+                    // Display the LaTeX output
+                    outputElement.textContent = data.latex;
+                }
+            })
+            .catch(error => {
+                outputElement.textContent = "An unknown error occurred during conversion.";
+                console.error('Fetch Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
