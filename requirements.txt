@@ -1,0 +1,6 @@
+torch
+transformers
+Pillow
+nougat_latex
+flask
+gunicorn
