@@ -47,4 +47,5 @@ This project aims to build an application that converts images of handwritten or
 
 ---
 
+Documentation Link: https://github.com/ucsb-cmptgcs1l-f25/veeral-Latexify.wiki.git
 Feel free to paste this directly into your README.md! Let me know if you want help formatting it as Markdown or adding anything else.
